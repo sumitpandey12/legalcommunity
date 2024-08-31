@@ -70,29 +70,23 @@ const feedLists = [
       "https://images.unsplash.com/photo-1720719542373-9e9067e6be20?q=80&w=1467&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
 ];
-const Feed = () => {
-  const [feeds, setFeeds] = useState([]);
-  const publicController = new PublicController();
-
-  useEffect(() => {
-    getFeeds();
-  }, []);
-
-  const getFeeds = async () => {
-    try {
-      const res = await publicController.getPosts();
-      console.log(res);
-      setFeeds(res);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
+const Feed = ({ feeds }) => {
   return (
     <div className="">
-      {feedLists.map((feed, index) => (
-        <FeedItem key={index} {...feed} />
-      ))}
+      {feeds &&
+        feeds.map((feed, index) => (
+          <FeedItem
+            key={index}
+            full_name={feed.name}
+            comment_count={feed.comment_count}
+            date={feed.created_at}
+            description={feed.query_content}
+            image_url={feed.file}
+            id={feed.id}
+            user_profile={feed.profile}
+            like_count={feed.vote_count}
+          />
+        ))}
     </div>
   );
 };

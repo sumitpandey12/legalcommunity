@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Avatar from "../../Utils/Avatars";
 import Button from "../../Utils/Button";
 import Tabs from "@mui/material/Tabs";
@@ -7,6 +7,8 @@ import Tooltip from "@mui/material/Tooltip";
 import Box from "@mui/material/Box";
 import FeedItem from "../Home/Feed/FeedItem";
 import LibraryItem from "../../Utils/LibraryPostCard";
+import UserContoller from "../../APIs/UserController";
+import APIURLs from "../../APIs/APIUrls";
 
 const feedLists = [
   {
@@ -130,6 +132,28 @@ const libraryPosts = [
 
 const Account = () => {
   const [selectedTab, setSelectedTab] = useState(0);
+
+  const [user, setUser] = React.useState(null);
+
+  const userController = new UserContoller();
+
+  useEffect(() => {
+    getUser();
+  }, []);
+
+  const getUser = async () => {
+    const response = await fetch(APIURLs.baseURL + APIURLs.profile, {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+        token:
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo0LCJ1c2VyX3R5cGUiOiJVc2VyIiwiaWF0IjoxNzI1MTM1NTkyfQ.GBUpiKi_ezRt4kkjac9QBUdTngCArnYk2AkCGtPF4lc",
+      },
+    });
+
+    console.log(response);
+  };
 
   return (
     <div className="w-full flex flex-col items-center p-4">

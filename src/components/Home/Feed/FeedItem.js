@@ -59,18 +59,20 @@ const FeedItem = ({
       >
         {description}
       </p>
-      <img
-        src={image_url}
-        className="h-80 w-full rounded-xl object-cover"
-        style={{ objectFit: "fill" }}
-      />
+      {image_url && (
+        <img
+          src={image_url}
+          className="h-80 w-full rounded-xl object-cover"
+          style={{ objectFit: "fill" }}
+        />
+      )}
 
       <div className="mt-4">
         <div className="flex items-center justify-between text-slate-500">
           <div className="flex space-x-4 md:space-x-8">
             <div className="flex cursor-pointer items-center transition hover:text-slate-600">
               <AiOutlineComment size={20} />
-              <span>125</span>
+              <span>{comment_count}</span>
             </div>
             <div className="flex gap-1 items-center">
               <div
@@ -86,7 +88,7 @@ const FeedItem = ({
                   UpVote
                 </span>
               </div>
-              <span>120</span>
+              <span>{like_count}</span>
               <Tooltip title="DownVote" placement="top">
                 <div
                   onClick={() => setUpVote(false)}
