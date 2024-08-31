@@ -142,7 +142,9 @@ const Account = () => {
   }, []);
 
   const getUser = async () => {
-    const response = await fetch(APIURLs.baseURL + APIURLs.profile, {
+    const url = APIURLs.baseURL + APIURLs.profile;
+    console.log(url);
+    const response = await fetch(url, {
       method: "POST",
       mode: "cors",
       headers: {
@@ -226,7 +228,6 @@ const TabMenu = ({ selectedTab, setSelectedTab }) => {
         value={selectedTab}
         onChange={handleChange}
         aria-label="secondary tabs example"
-        textColor={"rgb(67 20 7)"}
         indicatorColor="secondary"
       >
         <Tab value={0} label="Legal Query" />
